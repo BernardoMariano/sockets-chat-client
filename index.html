@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="Soquetes">
+    <head>
+        <title>Soquetes</title>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
+        <script src="app/controllers.js"></script>
+    </head>
+    <body ng-cloak>
+        <div ng-controller="MainCtrl">
+            <div class="login-wrapper" ng-hide="isLoggedIn">
+                Name:<br>
+                <input ng-model="name"><br>
+                <button ng-click="login()">Login!</button>
+            </div>
+            <div class="rooms-wrapper" ng-show="isLoggedIn && !inChatRoom">
+                <form>
+                    New room:<br>
+                    <input ng-model="newRoom"><br>
+                    <button ng-click="createRoom()">Create!</button>
+                </form>
+                <ul>
+                    <li ng-repeat="room in rooms track by $index">
+                        <a href="#" ng-click="enterRoom(room);">{{ room.name }}</a>
+                        ({{ room.users.length }} online)
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-wrapper" ng-show="isLoggedIn && inChatRoom">
+                <a href="#" ng-click="leaveRoom();">&#10094; Leave</a>
+                <strong>{{ currentRoom.name }}</strong>
+                <!-- <span>({{ currentRoom.users.length }} online)</span> -->
+                <form>
+                    Message:<br>
+                    <textarea ng-model="body" ng-keypress="sendIfEnter($event);"></textarea><br>
+                    <button ng-click="send()">Send!</button>
+                </form>
+                <ul>
+                    <li ng-repeat="msg in messages track by $index">
+                        <span>{{ msg.time }}</span>
+                        -
+                        <span ng-hide="msg.sender == 'system'">{{ msg.sender }}: </span>
+                        <span>{{ msg.body }}</span>
+                    </li>
+                </ul>
+            </div>
+    </body>
+</html>
