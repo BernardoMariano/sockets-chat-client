@@ -6,7 +6,9 @@
   "dependencies": {
     "express": "^4.14.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
