@@ -1,0 +1,14 @@
+<div class="rooms-wrapper">
+    Hello, {{ user.name }}!
+    <form>
+        New room:<br>
+        <input ng-model="newRoom"><br>
+        <button ng-click="createRoom()">Create!</button>
+    </form>
+    <ul>
+        <li ng-repeat="room in rooms track by $index">
+            <strong ng-click="enterRoom(room);">{{ room.name }}</strong>
+            ({{ room.users.length }} online)
+        </li>
+    </ul>
+</div>

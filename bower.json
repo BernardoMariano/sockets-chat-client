@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angular": "^1.5.8",
-    "sails.io.js": "^0.13.8"
+    "sails.io.js": "^0.13.8",
+    "angular-ui-router": "ui-router#^0.3.1"
   }
 }
