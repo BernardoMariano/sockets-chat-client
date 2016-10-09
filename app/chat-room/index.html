@@ -1,18 +1,16 @@
 <div class="chat-wrapper">
-    <button ng-click="leaveRoom();">&#10094; Leave</button>
-    <strong>{{ currentRoom.name }}</strong>
-    <!-- <span>({{ currentRoom.users.length }} online)</span> -->
     <form>
-        Message:<br>
-        <textarea ng-model="body" ng-keypress="sendIfEnter($event);"></textarea><br>
-        <button ng-click="send()">Send!</button>
+        <md-input-container class="md-block">
+          <label>Message</label>
+          <textarea ng-model="body" ng-keypress="sendIfEnter($event);" rows="2" md-select-on-focus></textarea>
+          <md-button class="md-raised md-primary" ng-click="send()">Send!</md-button>
+        </md-input-container>
     </form>
-    <ul>
-        <li ng-repeat="msg in messages track by $index">
-            <span>{{ msg.time }}</span>
-            -
-            <span ng-hide="msg.sender == 'system'">{{ msg.sender }}: </span>
-            <span>{{ msg.body }}</span>
+    <ul class="messages">
+        <li class="message" ng-repeat="msg in messages track by $index" ng-class="{ 'is-system': msg.sender === 'system' }">
+            <span class="message-time">{{ msg.time }}</span>
+            <span class="message-sender">{{ msg.sender }}: </span>
+            <span class="message-body">{{ msg.body }}</span>
         </li>
     </ul>
 </div>

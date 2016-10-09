@@ -1,6 +1,7 @@
 angular
     .module('App')
     .controller('ChatCtrl', function ($rootScope, $scope, $state) {
+        $rootScope.messages = []
 
         $scope.leaveRoom = () => {
             socket.post('https://lcchat.herokuapp.com/soquete/leaveRoom', { roomName: $rootScope.currentRoom.name })

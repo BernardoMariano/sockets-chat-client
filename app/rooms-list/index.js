@@ -9,7 +9,6 @@ angular
         $scope.enterRoom = room => {
             socket.post('https://lcchat.herokuapp.com/soquete/enterRoom', { roomName: room.name })
             $rootScope.currentRoom = room
-            $rootScope.messages = []
             $state.go('room', {
                 slug: room.name
             })

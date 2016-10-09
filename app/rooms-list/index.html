@@ -1,14 +1,15 @@
 <div class="rooms-wrapper">
-    Hello, {{ user.name }}!
     <form>
-        New room:<br>
-        <input ng-model="newRoom"><br>
-        <button ng-click="createRoom()">Create!</button>
+        <md-input-container flex>
+          <label>New room</label>
+          <input type="text" ng-model="newRoom">
+          <md-button class="md-raised" ng-click="createRoom()">Create</md-button>
+        </md-input-container>
     </form>
-    <ul>
-        <li ng-repeat="room in rooms track by $index">
-            <strong ng-click="enterRoom(room);">{{ room.name }}</strong>
-            ({{ room.users.length }} online)
-        </li>
-    </ul>
+    <md-list-item class="md-3-line" ng-repeat="room in rooms track by $index" ng-click="enterRoom(room);">
+      <div class="md-list-item-text" layout="column">
+        <h3>{{ room.name }}</h3>
+        <p>{{ room.users.length }} online</p>
+      </div>
+    </md-list-item>
 </div>

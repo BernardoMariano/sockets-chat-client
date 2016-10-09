@@ -1,0 +1,39 @@
+body {
+
+}
+
+.messages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.message {
+    padding: 10px 0;
+}
+
+.message-time {
+    float: right;
+    color: #999;
+}
+
+.message-sender {
+    font-weight: bold;
+}
+
+.message.is-system {
+    color: #bbb;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+}
+.message.is-system .message-time {
+    float: none;
+    color: #bbb;
+}
+.message.is-system .message-sender {
+    display: none;
+}

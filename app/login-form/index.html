@@ -1,5 +1,7 @@
 <div class="login-wrapper">
-    Name:<br>
-    <input ng-model="user.name"><br>
-    <button ng-click="login()">Login!</button>
+    <md-input-container flex>
+        <label>Name</label>
+        <input type="text" ng-model="user.name">
+        <md-button class="md-raised md-primary" ng-click="login()">Join</md-button>
+    </md-input-container>
 </div>
