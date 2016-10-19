@@ -5,7 +5,9 @@ Notification.requestPermission()
 
 angular
     .module('App', ['ui.router', 'ngMaterial'])
-    .config(($stateProvider, $urlRouterProvider, $locationProvider) => {
+    // .constant('API_ENDPOINT', 'https://lcchat.herokuapp.com')
+    .constant('API_ENDPOINT', 'http://192.168.1.154:1337')
+    .config(($stateProvider, $urlRouterProvider, $locationProvider, API_ENDPOINT) => {
 
         $stateProvider
             .state({
@@ -29,12 +31,12 @@ angular
                 templateUrl: '/app/chat-room/index.html'
             })
 
-        $locationProvider.html5Mode(true).hashPrefix('!')
+        // $locationProvider.html5Mode(true).hashPrefix('!')
 
         $urlRouterProvider.otherwise('/login')
     })
-    .controller('MainCtrl', ($rootScope, $scope, $timeout, $state) => {
-        io.sails.url = 'https://lcchat.herokuapp.com/'
+    .controller('MainCtrl', ($rootScope, $scope, $timeout, $state, API_ENDPOINT) => {
+        io.sails.url = API_ENDPOINT
 
         $scope.user = {}
         $rootScope.messages = []
@@ -54,17 +56,22 @@ angular
             $scope.$apply()
         })
 
+        socket.on('externalAction', res => {
+            $rootScope.externalAction = res
+            $scope.$apply()
+        })
+
         $scope.login = () => {
             const { name } = $scope.user
-            socket.get('https://lcchat.herokuapp.com/soquete/init', { name })
-            socket.get('https://lcchat.herokuapp.com/soquete/listRoom', { name })
+            socket.get(API_ENDPOINT + '/soquete/init', { name })
+            socket.get(API_ENDPOINT + '/soquete/listRoom', { name })
             $rootScope.isLoggedIn = true
             $state.go('rooms')
         }
 
         $scope.mainLink = () => {
             if (!!$rootScope.currentRoom) {
-                socket.post('https://lcchat.herokuapp.com/soquete/leaveRoom', { roomName: $rootScope.currentRoom.name })
+                socket.post(API_ENDPOINT + '/soquete/leaveRoom', { roomName: $rootScope.currentRoom.name })
                 $rootScope.currentRoom = null
             }
             $state.go('rooms')

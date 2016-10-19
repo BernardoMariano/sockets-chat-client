@@ -1,8 +1,9 @@
 <div class="chat-wrapper">
     <form>
         <md-input-container class="md-block">
+          {{ externalAction || ' ' }}
           <label>Message</label>
-          <textarea ng-model="body" ng-keypress="sendIfEnter($event);" rows="2" md-select-on-focus></textarea>
+          <textarea ng-model="body" ng-keypress="checkIfEnter($event);" ng-change="handleKeypress($event);" ng-model-options="{ debounce: 500 }" rows="2" md-select-on-focus></textarea>
           <md-button class="md-raised md-primary" ng-click="send()">Send!</md-button>
         </md-input-container>
     </form>
